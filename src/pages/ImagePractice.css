@@ -1,0 +1,8 @@
+.image-page { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 24px; background: linear-gradient(135deg, #edfdf6, #cfeee0); }
+.image-card { width: min(100%, 520px); background: white; border-radius: 24px; padding: 28px; box-shadow: 0 16px 32px rgba(20, 74, 56, 0.16); }
+.image-card h1 { font-size: 1.6rem; margin-bottom: 8px; color: #1f6d4b; }
+.image-card p { color: #5d7168; margin-bottom: 20px; }
+.image-card img { width: 180px; height: 180px; object-fit: contain; margin: 16px auto; display: block; }
+.image-card h2 { font-size: 1.8rem; margin-bottom: 16px; color: #183b2e; }
+.image-card button { width: 100%; padding: 12px 14px; margin-top: 10px; border: none; border-radius: 999px; background: #1f6d4b; color: white; }
+.feedback { margin-top: 16px; padding: 12px; border-radius: 14px; background: #f3fcf7; color: #355946; }

@@ -1,0 +1,70 @@
+.coaching-card {
+
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+box-shadow:
+0 8px 25px rgba(0,0,0,0.12);
+
+margin:20px 0;
+
+border-left:6px solid #146c5a;
+
+}
+
+
+
+.coaching-card h2 {
+
+color:#146c5a;
+
+font-size:24px;
+
+margin-bottom:15px;
+
+}
+
+
+
+.coach-text {
+
+font-size:17px;
+
+color:#444;
+
+line-height:1.6;
+
+}
+
+
+
+.coach-btn {
+
+margin-top:15px;
+
+background:#146c5a;
+
+color:white;
+
+border:none;
+
+padding:12px 25px;
+
+border-radius:25px;
+
+font-size:16px;
+
+cursor:pointer;
+
+}
+
+
+
+.coach-btn:hover {
+
+transform:scale(1.05);
+
+}

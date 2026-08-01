@@ -1,0 +1,52 @@
+.coaching-card{
+
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+margin:20px 0;
+
+box-shadow:0 8px 25px rgba(0,0,0,0.15);
+
+border-left:6px solid #146c5a;
+
+}
+
+
+.coaching-card h2{
+
+color:#146c5a;
+
+}
+
+
+.coaching-card p{
+
+font-size:17px;
+
+color:#555;
+
+line-height:1.5;
+
+}
+
+
+.coaching-card button{
+
+background:#146c5a;
+
+color:white;
+
+border:none;
+
+padding:12px 25px;
+
+border-radius:25px;
+
+cursor:pointer;
+
+font-size:16px;
+
+}

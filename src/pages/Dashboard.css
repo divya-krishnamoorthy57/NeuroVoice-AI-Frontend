@@ -1,0 +1,27 @@
+.dashboard-page {
+  min-height: 100vh;
+  padding: 40px;
+  background: linear-gradient(135deg,#d9f7ee,#8ed8c5);
+}
+
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 20px;
+  margin-top: 30px;
+}
+
+
+.stat-card,
+.progress-box {
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  text-align:center;
+}
+
+
+.stat-card h2 {
+  font-size:35px;
+}

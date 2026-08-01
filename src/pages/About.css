@@ -1,0 +1,7 @@
+.about-page { min-height: 100vh; padding: 32px; background: linear-gradient(135deg, #eefbf4, #d8f2e2); }
+.about-card { max-width: 900px; margin: 0 auto; background: white; border-radius: 24px; padding: 32px; box-shadow: 0 16px 32px rgba(20, 74, 56, 0.13); }
+.about-card h1 { font-size: 2rem; margin-bottom: 12px; color: #1e6d4b; }
+.about-card p { color: #5d7168; line-height: 1.7; }
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 20px 0; }
+.info-card { background: #f5fcf8; border-radius: 16px; padding: 16px; }
+.info-card h2 { color: #2e8b57; margin-bottom: 8px; }

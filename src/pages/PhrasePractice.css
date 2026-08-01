@@ -1,0 +1,79 @@
+.phrase-container {
+
+    min-height: 100vh;
+    background: #eaf8f1;
+    padding: 40px;
+    text-align: center;
+
+}
+
+
+.phrase-container h1 {
+
+    color: #176b5c;
+
+}
+
+
+.subtitle {
+
+    color: #555;
+    margin-bottom: 30px;
+
+}
+
+
+.phrase-card,
+.result-card {
+
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 500px;
+    margin: 20px auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+}
+
+
+.phrase-card h3 {
+
+    font-size: 24px;
+    color: #333;
+
+}
+
+
+button {
+
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 16px;
+
+}
+
+
+.speak-btn {
+
+    background: #2ca58d;
+    color: white;
+
+}
+
+
+.next-btn {
+
+    background: #176b5c;
+    color: white;
+
+}
+
+
+.result-card p {
+
+    font-size: 18px;
+
+}

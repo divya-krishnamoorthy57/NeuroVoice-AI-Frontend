@@ -1,0 +1,8 @@
+.register-page { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; background: linear-gradient(135deg, #e7f8ee, #bfe8d2); }
+.register-card { width: min(100%, 400px); padding: 32px; border-radius: 24px; background: rgba(255, 255, 255, 0.95); box-shadow: 0 16px 32px rgba(15, 70, 50, 0.15); text-align: center; }
+.register-card h1 { color: #1d6e4c; margin-bottom: 6px; }
+.register-card p { color: #5d7168; margin-bottom: 12px; }
+.register-card input { width: 100%; padding: 12px 14px; margin: 8px 0; border: 1px solid #d5e9df; border-radius: 999px; outline: none; }
+.register-card input:focus { border-color: #2e8b57; }
+.register-card button { width: 100%; padding: 12px 16px; border: none; border-radius: 999px; background: linear-gradient(90deg, #2e8b57, #3aa36d); color: white; margin-top: 12px; }
+.login-link a { color: #2e8b57; font-weight: 600; }
