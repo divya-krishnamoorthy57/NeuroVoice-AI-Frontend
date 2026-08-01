@@ -11,7 +11,6 @@ import ImagePractice from "./pages/ImagePractice";
 import PhrasePractice from "./pages/PhrasePractice";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Profile from "./pages/Profile";
 import Progress from "./pages/Progress";
 import { getStoredAuth } from "./services/api";
 
@@ -127,17 +126,6 @@ function App() {
         element={
           <ProtectedRoute>
             <Training />
-          </ProtectedRoute>
-        }
-      />
-
-
-
-      <Route
-        path="/profile"
-        element={
-          <ProtectedRoute>
-            <Profile />
           </ProtectedRoute>
         }
       />

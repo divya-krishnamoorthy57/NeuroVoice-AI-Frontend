@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import { clearAuthSession, getStoredAuth } from "../services/api";
@@ -7,29 +7,15 @@ function Home() {
 
   const navigate = useNavigate();
 
-  const [profile, setProfile] = useState({
-    name: "Friend",
-    email: "",
-  });
-
-
   useEffect(() => {
 
     const auth = getStoredAuth();
 
     if (!auth) {
       navigate("/login", { replace: true });
-      return;
     }
 
-
-    setProfile({
-      name: auth.name || "Friend",
-      email: auth.email || "",
-    });
-
-
-  }, []);
+  }, [navigate]);
 
 
   const handleLogout = () => {
@@ -56,7 +42,7 @@ function Home() {
 
 
           <h1>
-            Welcome, {profile.name} 👋
+            Welcome to NeuroVoice AI 👋
           </h1>
 
 
@@ -134,25 +120,6 @@ function Home() {
 
           <button onClick={() => navigate("/about")}>
             Learn More
-          </button>
-
-        </div>
-
-
-
-        <div className="card">
-
-          <h2>
-            👤 My Profile
-          </h2>
-
-          <p>
-            View your account details,
-            practice summary and average accuracy.
-          </p>
-
-          <button onClick={() => navigate("/profile")}>
-            Open Profile
           </button>
 
         </div>
