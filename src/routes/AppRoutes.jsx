@@ -11,7 +11,7 @@ import ImagePractice from "../pages/ImagePractice";
 import PhrasePractice from "../pages/PhrasePractice";
 import Dashboard from "../pages/Dashboard";
 import About from "../pages/About";
-import Profile from "../pages/Profile";
+
 
 function AppRoutes() {
   return (
@@ -67,10 +67,7 @@ function AppRoutes() {
         element={<About />}
       />
 
-      <Route
-        path="/profile"
-        element={<Profile />}
-      />
+     
 
     </Routes>
   );

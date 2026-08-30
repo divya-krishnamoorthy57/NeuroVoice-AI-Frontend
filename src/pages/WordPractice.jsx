@@ -24,7 +24,6 @@ const words = [
 ];
 
 function WordPractice() {
-
   const [currentWord, setCurrentWord] = useState(
     words[Math.floor(Math.random() * words.length)]
   );
@@ -34,44 +33,80 @@ function WordPractice() {
   const [feedback, setFeedback] = useState("");
   const [status, setStatus] = useState("");
 
+  // ==========================
+  // AI Voice
+  // ==========================
   const speakAI = (text) => {
-
-    if (!window.speechSynthesis) {
+    if (!("speechSynthesis" in window)) {
       alert("Speech synthesis is not supported.");
       return;
     }
 
-    window.speechSynthesis.cancel();
+    const synth = window.speechSynthesis;
 
-    const speech = new SpeechSynthesisUtterance(text);
+    synth.cancel();
 
-    speech.lang = "en-US";
-    speech.rate = 0.8;
-    speech.pitch = 1;
-    speech.volume = 1;
+    const speak = () => {
+      const utterance = new SpeechSynthesisUtterance(text);
 
-    window.speechSynthesis.speak(speech);
+      const voices = synth.getVoices();
 
+      const englishVoice =
+        voices.find((voice) => voice.lang.startsWith("en")) ||
+        voices[0];
+
+      if (englishVoice) {
+        utterance.voice = englishVoice;
+      }
+
+      utterance.lang = "en-US";
+      utterance.rate = 0.9;
+      utterance.pitch = 1;
+      utterance.volume = 1;
+
+      utterance.onstart = () => {
+        console.log("🔊 Speaking:", text);
+      };
+
+      utterance.onend = () => {
+        console.log("✅ Speech Finished");
+      };
+
+      utterance.onerror = (event) => {
+        console.error("Speech Error:", event.error);
+      };
+
+      synth.speak(utterance);
+    };
+
+    if (synth.getVoices().length === 0) {
+      synth.onvoiceschanged = () => {
+        speak();
+        synth.onvoiceschanged = null;
+      };
+    } else {
+      speak();
+    }
   };
 
+  // ==========================
+  // Listen Word
+  // ==========================
   const listenWord = () => {
-
     speakAI(currentWord);
-
   };
 
+  // ==========================
+  // Speech Recognition
+  // ==========================
   const startSpeaking = () => {
-
     const SpeechRecognition =
       window.SpeechRecognition ||
       window.webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
-
       alert("Please use Google Chrome.");
-
       return;
-
     }
 
     const recognition = new SpeechRecognition();
@@ -83,74 +118,60 @@ function WordPractice() {
 
     setStatus("🎧 Listening...");
 
-    recognition.start();
+    // Stop speech before starting recognition
+    window.speechSynthesis.cancel();
+
+    setTimeout(() => {
+      recognition.start();
+    }, 300);
 
     recognition.onresult = async (event) => {
-
       const text = event.results[0][0].transcript;
 
       setSpokenText(text);
-
       setStatus("Checking pronunciation...");
 
       try {
-
-        const result = await checkSpeech(
-          currentWord,
-          text
-        );
+        const result = await checkSpeech(currentWord, text);
 
         const score = Math.round(result.accuracy);
-
         setAccuracy(score);
 
-       const auth = getStoredAuth();
+        const auth = getStoredAuth();
 
-console.log("Auth:", auth);
+        if (auth?.id) {
+          try {
+            await saveProgress({
+              user_id: auth.id,
+              practice_type: "word",
+              accuracy: score,
+            });
 
-if (auth?.id) {
-  try {
-    await saveProgress({
-      user_id: auth.id,
-      practice_type: "word",
-      accuracy: Math.round(score),
-    });
-
-    console.log("✅ Word progress saved");
-  } catch (err) {
-    console.error(
-      "Word Progress Error:",
-      err.response?.data || err.message
-    );
-  }
-}
+            console.log("✅ Progress Saved");
+          } catch (err) {
+            console.error(
+              "Progress Error:",
+              err.response?.data || err.message
+            );
+          }
+        }
 
         let message = "";
 
         if (score >= 90) {
-
-          message =
-            "Excellent pronunciation!";
-
+          message = "Excellent pronunciation!";
         } else if (score >= 70) {
-
-          message =
-            "Good attempt. Speak a little clearer.";
-
+          message = "Good attempt. Speak a little clearer.";
         } else {
-
-          message =
-            "Keep practicing. Listen and try again.";
-
+          message = "Keep practicing. Listen and try again.";
         }
 
         setFeedback(message);
-
         setStatus("Completed ✅");
 
         speakAI(message);
-              } catch (error) {
 
+      } catch (error) {
         console.error(
           "Speech Error:",
           error.response?.data || error.message
@@ -161,68 +182,51 @@ if (auth?.id) {
         speakAI(
           "Speech evaluation failed. Please try again."
         );
-
       }
-
     };
 
     recognition.onerror = (event) => {
-
-      console.log(event.error);
+      console.error(event.error);
 
       setStatus("❌ " + event.error);
 
       speakAI(
         "I could not hear you. Please try again."
       );
-
     };
 
     recognition.onend = () => {
-
-      console.log("Recognition ended");
-
+      console.log("Recognition Ended");
     };
-
   };
 
+  // ==========================
+  // Next Word
+  // ==========================
   const nextWord = () => {
-
     let newWord;
 
     do {
-
       newWord =
         words[
           Math.floor(
             Math.random() * words.length
           )
         ];
-
     } while (newWord === currentWord);
 
     setCurrentWord(newWord);
-
     setSpokenText("");
-
     setAccuracy(null);
-
     setFeedback("");
-
     setStatus("");
 
     setTimeout(() => {
-
       speakAI(newWord);
-
     }, 300);
-
   };
-
-  return (
-
+    return (
     <div className="word-container">
-
       <div className="word-card">
 
         <h1>Word Practice</h1>
@@ -254,42 +258,55 @@ if (auth?.id) {
           <h3>{status}</h3>
 
           <p>
-            <b>Your Speech:</b>
+            <strong>Your Speech:</strong>
             <br />
             {spokenText || "-"}
           </p>
 
           {accuracy !== null && (
-
             <p className="accuracy">
-              Accuracy: {accuracy}%
+              Accuracy: <strong>{accuracy}%</strong>
             </p>
-
           )}
 
           {feedback && (
-
             <p className="feedback">
               💬 {feedback}
             </p>
-
           )}
 
         </div>
 
-        <button
-          className="next-btn"
-          onClick={nextWord}
+        <div
+          style={{
+            display: "flex",
+            gap: "10px",
+            justifyContent: "center",
+            marginTop: "20px",
+            flexWrap: "wrap",
+          }}
         >
-          Next Word ➡️
-        </button>
+          <button
+            className="next-btn"
+            onClick={nextWord}
+          >
+            Next Word ➡️
+          </button>
+
+          {/* Temporary voice test button */}
+          <button
+            className="listen-btn"
+            onClick={() =>
+              speakAI("Hello Divya, welcome to NeuroVoice")
+            }
+          >
+            🔊 Test Voice
+          </button>
+        </div>
 
       </div>
-
     </div>
-
   );
-
 }
 
 export default WordPractice;
