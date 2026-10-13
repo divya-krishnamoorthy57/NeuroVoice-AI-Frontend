@@ -1,7 +1,21 @@
-/* Google Font */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+/* Google Fonts: Poppins & Noto Sans Tamil */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
-@import "tailwindcss";
+:root {
+  --primary-mint: #8ED8C5;
+  --light-mint: #D9F7EE;
+  --dark-teal: #16836D;
+  --dark-teal-hover: #116957;
+  --white-card: #FFFFFF;
+  --main-text: #303B37;
+  --secondary-text: #66756F;
+  --border-color: #DCE9E3;
+  --soft-neutral: #D9F7EE;
+  --accent-amber: #EAA83B;
+  --accent-red: #D9534F;
+  --font-family: 'Poppins', 'Noto Sans Tamil', 'Latha', 'Tamil Sangam MN', 'Mukta Malar', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --tamil-font: 'Noto Sans Tamil', 'Latha', 'Tamil Sangam MN', 'Mukta Malar', system-ui, sans-serif;
+}
 
 /* Global Reset */
 * {
@@ -10,62 +24,197 @@
   box-sizing: border-box;
 }
 
-/* Smooth Scrolling */
 html {
   scroll-behavior: smooth;
+  font-family: var(--font-family);
+  background-color: var(--light-mint);
+  color: var(--main-text);
 }
 
-/* Body Styling */
 body {
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #f5fcf7, #e8f8ef);
-  color: #1f2937;
+  font-family: var(--font-family);
+  background-color: var(--light-mint);
+  color: var(--main-text);
   overflow-x: hidden;
-  font-weight: 400;
   line-height: 1.6;
+  min-height: 100vh;
 }
 
-/* Headings */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Poppins", sans-serif;
+/* Accessible focus ring */
+*:focus-visible {
+  outline: 3px solid var(--dark-teal);
+  outline-offset: 2px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family);
   font-weight: 700;
-  color: #0f5132;
+  color: var(--dark-teal);
+  line-height: 1.3;
 }
 
-/* Paragraphs */
 p {
-  font-size: 16px;
-  font-weight: 400;
-  color: #4b5563;
+  color: var(--secondary-text);
+  font-size: 1rem;
 }
 
-/* Links */
 a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 
-/* Buttons */
 button {
+  font-family: var(--font-family);
   cursor: pointer;
-  font-family: "Poppins", sans-serif;
+  border: none;
+  background: none;
+  transition: all 0.2s ease-in-out;
+}
+
+input, textarea, select {
+  font-family: var(--font-family);
+  color: var(--main-text);
+  border: 1.5px solid var(--border-color);
+  background-color: var(--white-card);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--dark-teal);
+  box-shadow: 0 0 0 3px rgba(142, 216, 197, 0.35);
+}
+
+/* Reusable UI Components */
+.nv-card {
+  background: var(--white-card);
+  border: 1px solid var(--border-color);
+  border-radius: 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nv-card:hover {
+  box-shadow: 0 14px 36px rgba(22, 131, 109, 0.1);
+}
+
+.nv-btn-pill {
+  background-color: var(--dark-teal);
+  color: #FFFFFF;
+  padding: 13px 32px;
+  border-radius: 9999px;
   font-weight: 600;
+  font-size: 1.05rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(22, 131, 109, 0.22);
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
 }
 
-/* Inputs */
-input,
-textarea,
-select {
-  font-family: "Poppins", sans-serif;
+.nv-btn-pill:hover:not(:disabled) {
+  background-color: var(--dark-teal-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(22, 131, 109, 0.3);
 }
 
-/* Text Selection */
-::selection {
-  background: #2e8b57;
-  color: white;
+.nv-btn-pill:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.nv-btn-primary {
+  background-color: var(--dark-teal);
+  color: #FFFFFF;
+  padding: 13px 30px;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(22, 131, 109, 0.25);
+}
+
+.nv-btn-primary:hover:not(:disabled) {
+  background-color: var(--dark-teal-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(22, 131, 109, 0.3);
+}
+
+.nv-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.nv-btn-secondary {
+  background-color: var(--light-mint);
+  color: var(--dark-teal);
+  border: 1px solid var(--primary-mint);
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.nv-btn-secondary:hover:not(:disabled) {
+  background-color: var(--primary-mint);
+  color: var(--main-text);
+  transform: translateY(-1px);
+}
+
+.nv-btn-outline {
+  border: 1.5px solid var(--border-color);
+  background-color: transparent;
+  color: var(--main-text);
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nv-btn-outline:hover {
+  background-color: #F0F7F4;
+  border-color: var(--primary-mint);
+}
+
+.nv-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background-color: var(--light-mint);
+  color: var(--dark-teal);
+  border: 1px solid rgba(142, 216, 197, 0.5);
+}
+
+/* Accessibility font scale adjustments */
+.font-scale-large {
+  font-size: 1.15rem;
+}
+.font-scale-xlarge {
+  font-size: 1.3rem;
+}
+.contrast-high {
+  --main-text: #111A16;
+  --secondary-text: #374640;
+  --border-color: #8ED8C5;
 }
